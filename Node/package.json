@@ -1,0 +1,25 @@
+{
+  "name": "node_server",
+  "version": "1.0.0",
+  "description": "This is a relay server. These are voluntary run servers that form the circuit",
+  "main": "nc.js",
+  "dependencies": {
+    "chance": "^0.7.3",
+    "socket.io": "^1.3.4",
+    "socket.io-client": "^1.3.3",
+    "fs": "^0.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node nc.js"
+  },
+  "keywords": [
+    "Relay",
+    "Server",
+    "Node",
+    "Lilac",
+    "Node"
+  ],
+  "author": "Hussain Mucklai, Revanth Pobala",
+  "license": "MIT"
+}

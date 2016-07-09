@@ -1,0 +1,160 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script language="JavaScript" type="text/javascript" src="bootstrap.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/paper/bootstrap.min.css" rel="stylesheet">
+    <title> Developers-Lilac </title>
+	<meta name="author" content="Hussain Mucklai, Revanth Pobala and Matthew Wright">
+	<meta name="description" content="Lilac is a Lightweight Lowlatency Anonymous Chat. It is basically an Instant messenger which respects the users privacy and provides secure communications to its users.">
+	<meta name="copyright" content="Hussain Mucklai, Revanth Pobala and Matthew Wright">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+	.navbar-default .navbar-nav>li>a {
+		color: fff;
+	}
+	</style>
+</head>
+
+<body style="background-color: #404740; overflow-x:hidden ">
+
+    <!---------------------------------------------Header Start----------------------------------------------------------------------------------->
+    <nav class="navbar navbar-default" style="
+    margin: 0; background-color:#a369cb">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="color:white" href="index.html">Lilac</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#">About us<span class="sr-only">(current)</span></a></li>
+                    <li><a href="index.html">Login</a></li>
+					<li><a href="usage.html">FAQ's</a></li>
+                    <li><a href="home.html">Downloads</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!---------------------------------------------Header end----------------------------------------------------------------------------------->
+
+    <!--content-->
+    <div class="container" style="">
+        <h1 style="text-align:center;color:white"> Authors </h1>
+        <br>
+        <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="btn btn-default well well-lg col-lg-4" style="background-color:white">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <img src='revanth.jpg' class="img-circle" style="height:55; width:55">
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <a href="http://revanthpobala.com" target="_blank"><h5 style="text-align: center; color:#2B2B2B"> Revanth Pobala </h5></a>
+                                <b><h5 style="text-align: center; color:#2B2B2B"> Graduate Student </h5></b>
+                            </div>
+                            <div class="row">
+                                <a href="https://www.facebook.com/revanth1108" target="_blank"> <i class="fa fa-facebook"></i> </a>&nbsp&nbsp
+                                <a href="https://www.linkedin.com/in/revanthpobala" target="_blank"><i class="fa fa-linkedin"></i></a>&nbsp&nbsp
+                                <a href="https://github.com/revanthpobala" target="_blank"> <i class="fa fa-github"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="btn well well-lg col-lg-4" style="background-color:white">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <img src='Hussain.jpg' class="img-circle" style="height:55; width:55">
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <a href="https://www.linkedin.com/in/mucklai" target="_blank"><h5 style="text-align: center; color:#2B2B2B"> Hussain Mucklai </h5></a>
+                                <b><h5 style="text-align: center; color:#2B2B2B"> Undergraduate Student </h5></b>
+                            </div>
+                            <div class="row">
+                                <a href="https://www.facebook.com/hussain.mucklai" target="_blank"> <i class="fa fa-facebook"></i> </a>&nbsp&nbsp
+                                <a href="https://www.linkedin.com/in/mucklai" target="_blank"><i class="fa fa-linkedin"></i></a>&nbsp&nbsp
+                                <a href="https://github.com/mucklai" target="_blank"> <i class="fa fa-github"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="btn btn-default well well-lg col-lg-6" style="background-color:white">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <img src='https://media.licdn.com/media/p/3/000/006/2ed/285bbb2.jpg' class="img-circle" style="height:70; width:70">
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <b><h5 style="text-align: center; color:black"> Matthew Wright </h5></b>
+                                <b><h5 style="text-align: center; color:black"> Principal investigator </h5></b>
+                            </div>
+
+                            <div class="row">
+                                <a href="https://www.facebook.com/matthewkwright" target="_blank"> <i class="fa fa-facebook"></i> </a>&nbsp&nbsp
+                                <a href="https://www.linkedin.com/in/matthew-wright-3668bb1" target="_blank"><i class="fa fa-linkedin"></i></a>&nbsp&nbsp
+                                <!--a href="https://github.com/" target="_blank"> <i class="fa fa-github"></i> </a-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+		
+		<div class="row">
+		<div class="jumbotron" style="background:white;margin: 2% 2% 2% 2%">
+			<h5 class="text-justify" style="color:">We thank <a href="http://www.nsf.gov/" target="_blank">NSF</a> for funding
+				this project. We have used all Open Source Modules to build this project. We thank each and every developer who
+				have helped us. To notice a few here are the open source modules we used. Please let us know if your module is used and not mentioned in this list.
+					<br>
+
+					<ul>
+						<li> <a href="https://crypto.stanford.edu/sjcl/"target = "_blank">SJCL </a> </li>
+						<li> <a href="http://socket.io/" target ="_blank"> Socket.io </a> </li>
+						<li> <a href ="http://codepen.io/Rachouan/pen/azPxBQ" target ="_blank"> Pre Loader </a> </li>
+						<li> <a href ="http://bootswatch.com/paper/"target ="_blank"> Bootswatch </a> </li>
+					</ul>
+				</h5>
+		</div>
+		
+		</div>
+		
+    </div>
+    <!-------------------------------Footer---------------------------------------------------------------------------->
+	<br>
+    <div class="footer element" style="color:white;">
+        <center> &copy; 2016 www.thelilacproject.org. All Rights Reserved. </center>
+    </div>
+
+
+    <!-------------------------------Footer end---------------------------------------------------------------------------->
+
+
+</body>
+
+</html>

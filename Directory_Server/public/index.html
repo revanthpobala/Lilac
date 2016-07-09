@@ -1,0 +1,403 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="author" content="Hussain Mucklai, Revanth Pobala and Matthew Wright">
+	<meta name="description" content="Lilac is a Lightweight Lowlatency Anonymous Chat. It is basically an Instant messenger which respects the users privacy and provides secure communications to its users.">
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="robots" content="Lilac is a Lightweight Lowlatency Anonymous Chat. It is basically an Instant messenger which respects the users privacy and provides secure communications to its users."/>
+	<meta name="googlebot" content="Lilac is a Lightweight Lowlatency Anonymous Chat. It is basically an Instant messenger which respects the users privacy and provides secure communications to its users."/>
+	<meta name="google-site-verification" content="Lilac is a Lightweight Lowlatency Anonymous Chat. It is basically an Instant messenger which respects the users privacy and provides secure communications to its users."/>
+
+	<meta name="copyright" content="Hussain Mucklai, Revanth Pobala and Matthew Wright">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lilac</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/paper/bootstrap.min.css" rel="stylesheet">
+	<link href="mfb.css.map" rel="stylesheet">
+	<link href="mfb.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css" rel="stylesheet">
+	<link href="timeline-style.css" rel="stylesheet">
+	<link href="spinner.css" rel="stylesheet">
+	<link href="main.css" rel="stylesheet">
+	<script language="JavaScript" type="text/javascript" src="chance.js"></script>
+	<script language="JavaScript" type="text/javascript" src="util.js"></script>
+	<script language="JavaScript" type="text/javascript" src="curve.js"></script>
+	<script language="JavaScript" type="text/javascript" src="aes.js"></script>
+	<script language="JavaScript" type="text/javascript" src="md5.js"></script>
+	<script language="JavaScript" type="text/javascript" src="sha3.js"></script>
+	<script language="JavaScript" type="text/javascript" src="sjcl.js"></script>
+	<script language="JavaScript" type="text/javascript" src="BigInt.js"></script>
+	<script language="JavaScript" type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script language="JavaScript" type="text/javascript" src="jquery.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="encryption.js"></script>
+	<script language="JavaScript" type="text/javascript" src="bootstrap.js"></script>
+	<script language="JavaScript" type="text/javascript" src="jquery-ui.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="modernizr.js"></script>
+	<script language="JavaScript" type="text/javascript" src="mfb.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="modernizr.touch.js"></script>
+	<script language="JavaScript" type="text/javascript" src="main.js"></script>
+	<script language="JavaScript" type="text/javascript" src="jquery.slimscroll.min.js"></script>
+</head>
+
+<body style="background-color:#404740; width=100%; height=100%;">
+	<!-- Header-->
+
+			<nav class="navbar navbar-default" style="margin: 0; background-color:#a369cb">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand pull-left" style="color:white" href="index.html"><img src="icon-white.png" width="34px" /></a>
+						</div>
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+							<ul class="nav navbar-nav navbar-left">
+        						<li><a id="hide" class=" center glyphicon glyphicon-chevron-left" style="color:white"></a></li>
+    							<li>
+									<div class="navbar-form navbar-left">
+										<div class="form-group">
+											<input id="search_username" type="text" class="form-control" placeholder="Add a Friend" style="color:white">
+										</div>
+										<button id="search" class="btn btn-default">Submit</button>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+	<!--Header End-->
+	<!-- conversation jumbotron-->
+	<div class="row" style="height:92%">
+		<div id="body" class="col-lg-12">
+			<div class="jumbotron" style="background-color:#404749; /* margin-top: -18px; */padding: 0 0;margin: 0;">
+				<!--- Contacts sidebar-->
+				<div id="sidebar" class="col-lg-3" style="height:100%;background-color:white">
+					<!-- Own contact row-->
+					<div class="row panel panel-default">
+						<div class="panel-body center" style="background:transparent;">
+							<div id="user_initials" class="col-lg-2"> </div>
+							<div id="user_name" class="col-lg-8"> </div>
+							<div id="phone" class="col-lg-2 dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a id="maps_modal_pop" aria-label="Upload" data-toggle="popover" data-placement="left" title="Locate your circuit"> Circuit</a></li>
+										<li class="divider"></li>
+									<li><a id="upload_contacts"  aria-label="Upload" data-toggle="popover" data-placement="left" title="Upload/Downoad your contacts!">Contacts</a></li>
+									<li class="divider"></li>
+									<li><a  id="logoutButton" aria-label="Logout" data-toggle="popover" >Logout</a></li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- Own contact row end>
+							<div class="row" style="background-color:pink"> Hi </div-->
+					<!--friends-->
+					<div id="contacts" class="row" style="background-color:white">
+						<!--contacts end-->
+					</div>
+					<!--- Contacts sidebar end-->
+				</div>
+				<!---Conversation bar-->
+				<div id="convobar" class="col-lg-9" style="padding: 0;">
+					<!--Conversation Container -->
+					<div id="chat_container" style="background-color:transparent; z-index: 1; height:96%; width:90%;margin: 2% 2%; box-shadow: 5px 5px 5px 5px;position:relative;">
+						<!--Conversation Body-->
+						<div id="chat_body" class="row">
+							<div class="center instructions" style="margin-top:20px;margin-left:25%;margin-right:25%;">
+								<div class="alert alert-dismissible" style="background-color:#a369cb">
+									<button type="button" class="close" data-dismiss="alert">x</button>
+									<h4 style="text-align:center;color:white">Hi  <b id="hereusername"></b>!</h4>
+									<p style="text-align:center;">Add a contact using the search bar at the top. Start a conversation with them using the button next to their name.</p>
+								</div>
+						 	</div>
+						</div>
+						<!--Chat body-->
+						<!--Chat Input-->
+						<div id="chat_input_row" class="row">
+							<div id="chat_input_column" class="center">
+								<textarea id="chat_input" class="form-control chat_input" rows="1" placeholder="Type here..." maxlength="140"></textarea>
+							</div>
+							<div style="float:right;min-width=10%">
+								<ul id="menu" class="mfb-component--br mfb-zoomin" onmouseenter="menu.setAttribute('data-mfb-state', 'open');" onmouseleave="menu.setAttribute('data-mfb-state', 'close');"
+								onmousedown="menu.setAttribute('data-mfb-state', 'close');" onclick="if (menu.getAttribute('data-mfb-state') == 'close') menu.setAttribute('data-mfb-state', 'open'); else menu.setAttribute('data-mfb-state', 'close');">
+									<li class="mfb-component__wrap">
+										<a id="sendMessage" href="#" data-mfb-label="Send" class="mfb-component__button--main"> <i class="mfb-component__main-icon--resting ion-plus-round"></i> <i class="mfb-component__main-icon--active ion-paper-airplane"></i> </a>
+										<ul class="mfb-component__list">
+											<li>
+												<a id="smpAuthenticateButton" data-mfb-label="SMP" class="mfb-component__button--child"> <i id="smpAuthenticateButtonIcon" class="mfb-component__child-icon glyphicon glyphicon-lock"></i> </a>
+											</li>
+											<li>
+												<a id="endConversation" data-mfb-label="End Conversation" class="mfb-component__button--child"> <i id="end_chat" class="mfb-component__main-icon--active ion-close-round"></i> </a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!--Chat Input-->
+					</div>
+					<!--Conversation Container-->
+				</div>
+				<!---Conversation bar-->
+			</div>
+			<!--Col-lg-9-->
+		</div>
+		<!--Col-lg-12-->
+	</div>
+	<!--conversation jumbotron end-->
+	<!--DropDown Notifications-->
+
+		<div class="alerts">
+		<div id="new_partner_alert" class="alert alert-success">
+		  	<span id="new_partner_request"></span>
+		  	<button id="decline_new_partner" class="btn alertButton" aria-label="Close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+		  	<button id="accept_new_partner" class="btn alertButton" aria-label="Accept"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+  		</div>
+		</div>
+
+		<!--DropDown Notifications End-->
+	<!--Login Modal-->
+	<div class="modal" id="myModal" style="display: block;background: #404749;background-image: url(stars.png);	background-size: 40%;background-position: top; " tabindex="-1" role="dialog" aria-labelledby="enteruname" data-keyboard="false" data-backdrop="static"
+	aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<center>
+						<h4 class="modal-title" id="enteruname">Welcome to Lilac</h4> </center>
+				</div>
+				<br>
+				<div class="modal-body" style="background-color:#fff">
+					<div id="welcome" class="alert alert-success" role="alert"></div>
+					<form id="username_form">
+						<div id="username_taken" class="alert alert-danger" role="alert">Sorry, that username is taken.</div>
+						<div class="form-group">
+							<label for="username" class="control-label">Username:</label>
+							<br>
+							<input type="text" name="user" class="form-control" placeholder="Enter your username." id="username">
+							<br>
+							<label for="password" class="control-label">Password:</label>
+							<br>
+							<input type="password" name="password" class="form-control" placeholder="Enter your password (optional)" id="password">
+							<br>
+							<div class="row">
+								<div class="col-lg-8">
+									<div class="togglebutton">
+										<label>
+											<input type="checkbox" checked name="private_chat" id="private"> Allow my friends to find me. </label>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<button id="usernameButton" type="button" class="btn btn-primary" style="float: right">Submit</button>
+								</div>
+							</div>
+							<div class="row"><div class="col-lg-1"></div> New to Lilac? Please look at the <a href="usage.html" style="text-decoration:none" target="_blank"> <b>FAQ's</b> </a> before logging in. </div>
+						</div>
+					</form>
+					<div id="username_loading">Loading...</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Login Modal End-->
+	<!--SMP Modal-->
+	<div class="modal fade" id="SMPmodal" tabindex="-1" role="dialog" aria-labelledby="smp-title" data-keyboard="false" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#a369cb">
+					<center>
+						<h4 class="modal-title" id="smp-title">Identity Verification</h4> </center>
+				</div>
+				<div class="modal-body">
+					<div id="smp-body" class="alert alert-warning" role="alert"></div>
+					<form id="smp_form">
+						<div class="form-group">
+							<div id="question_div">
+								<label for="question" class="control-label">Question:</label>
+								<br>
+								<br>
+								<input type="text" class="form-control" placeholder="Enter a question (optional)" id="question"> </div>
+							<br>
+							<label for="password" class="control-label">Passcode:</label>
+							<br>
+							<br>
+							<input type="text" class="form-control" placeholder="Enter the passcode" id="passcode"> </div>
+						<div class="modal-footer">
+							<button id="smpButton" type="button" class="btn btn-success">Submit</button>
+							<button id="smpCancelButton" type="button" class="btn btn-danger">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--SMP Modal End-->
+	<!--SMP Failure Modal-->
+	<div class="modal fade"  id="SMPfailureModal" tabindex="-1" role="dialog" aria-labelledby="smpFailure-title" data-keyboard="false" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#a369cb">
+					<center>
+						<h4 class="modal-title" id="smpFailure-title">Identity Verification Failed</h4> </center>
+				</div>
+				<div class="modal-body">
+					<div id="smpFailure-body" class="alert alert-danger" role="alert"></div>
+					<form id="smpFailure_form">
+						<div class="form-group">
+							<div id="SMPfailFirst">
+								<button id="smpEndButton" type="button" class="btn btn-danger">End Conversation</button>
+								<button id="smpRetryButton" type="button" class="btn btn-primary">Retry Authentication</button>
+								<button id="smpMoreButton" type="button" class="btn">More Options</button>
+							</div>
+							<br>
+							<div id="SMPfailSecond">
+								<button id="smpContinueButton" type="button" class="btn btn-danger">Continue Anyway</button>
+							</div>
+							<br>
+							<div id="SMPfailThird">
+								<center class="">
+									<h4 class="alert alert-warning">Authentication has failed. Are you sure you want to continue?</h4> </center>
+								<br>
+								<button id="smpNoButton" type="button" class="btn btn-primary">No</button>
+								<button id="smpYesButton" type="button" class="btn btn-danger">Yes</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--SMP Failure Modal End-->
+
+
+	<!------------------------------------ Contacts download modal----------------------------------------------------------------------------------->
+
+<div class="modal" id="contacts_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#a369cb">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"  style="color:white">×</button>
+                 <center><b> <h4 class="modal-title">Upload/Download Contacts.</h4></b> </center>
+            </div>
+            <div class="modal-body">
+
+
+				<div class="row">
+					<div class="col-lg-12">
+						<form>
+							<div class="form-group" id="form-contacts">
+							<label for="inputFile" class=col-lg-0 control-label"></label>
+							<input type="text" id="upload-contacts" readonly="" class="form-control floating-label" placeholder="Upload contacts file">
+							<input type="file"  id="upload_contacts" accept='text/plain'>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class = "row">
+					<div class="col-lg-1"> </div>
+								<div class="col-lg-3"> <a href="javascript:void(0)" class=" btn btn-primary glyphicon glyphicon-refresh" id="reset-contacts" >&nbsp&nbspReset File</a></div>
+									<div class="col-lg-3">
+										<a href="javascript:void(0)" class="btn btn-success glyphicon glyphicon-download" id="download_contacts" style="" >&nbsp&nbspDownload</a>
+									</div>
+									<div class="col-lg-3">
+										<a href="javascript:void(0)" class="btn btn-danger glyphicon  glyphicon-trash" id="delete_contacts" style="">&nbsp&nbspDelete All</a>
+									</div>
+			<div class="col-lg-1"> </div>
+		</div>
+		<br> <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!------------------------------------modal end--------------------------------------------------------------------------------------------------->
+
+
+<!------------------------------------Maps circuit modal--------------------------------------------------------------------------------------------------->
+
+<div class="modal" id="mapmodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#a369cb">
+                <button type="button" class="close" style="color:white"data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" style="text-align:center"><b>My Circuit</b></h4>
+            </div>
+            <br><br>
+            <div class="modal-body">
+			<p id="circuit"></p>
+            <div id="map" style="padding-top:5%; margin-left:5%; margin-right:5%; width: 90%; height: 50%;"></div>
+
+            </div>
+            <br><br>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!------------------------------------maps modal end--------------------------------------------------------------------------------------------------->
+
+<!------------------------------------------------------------------------------------------------------------------- Smp and other information alert-->
+	<!--div class="alert alert-dismissible alert-warning" id="warn_users_smp">
+	  <button type="button" class="close" data-dismiss="alert">&close;</button>
+	  <h4 style="text-align:center">Tips to be secure</h4>
+	  <ul>
+	  	<li> Please initiate SMP to verify your chat partner. You can read more about <a href="https://en.wikipedia.org/wiki/Socialist_millionaire" target="_blank">Socialist Millionaire Protocol(SMP) here</a>.</li>
+
+	  </ul>
+	</div>
+<!------------------------------------------------------------------------------------------------------------------- Smp and other information alert end-->
+	<!-- Spinning Loader-->
+	<div id="main_loading" class="black-out">
+		<div class="preloader">
+			<header>
+				<h3 style="color:white;" >The Lilac Project</h3>
+				<h6 style="color:white;">is loading...<h6>
+				<h5 id="displaying" style="text-transform: lowercase ;color:white;"></h5>
+				<!--p style="color:red"> This website is not open for public yet. We are working on something. Please read the <a href ="usage.html" target="_blank">
+					FAQ's </a> in the meanwhile. Sorry, for the inconvienience.
+				</p-->
+			</header>
+			<section class="satelite"></section>
+			<section class="earth day"></section>
+		</div>
+
+	</div>
+	<!--Spinning loader-->
+	<div class="footer element" style="color:white;">
+        <center> &copy; 2016 www.thelilacproject.org.&nbsp	 All Rights Reserved. </center>
+    </div>
+</body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76466410-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
