@@ -1,6 +1,6 @@
 # Nodeclient Server
 
-<hr>
+
 
 * Nodeclient servers' or relays are volunteer-based servers which perform the same functionality in Lilac as the
 relays do in [Tor](torproject.org), anonymizing traffic. Relays in Lilac, unlike Tor, exclusively handle

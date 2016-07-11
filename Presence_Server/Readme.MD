@@ -1,6 +1,6 @@
 # Presence Server
 
-<hr>
+
 
 * The Presence Server serves a central role in establishing connections between chat partners.
 To do this, the Presence Server performs two functions: maintaining a list of online users and

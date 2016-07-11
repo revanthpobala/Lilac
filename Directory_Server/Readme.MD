@@ -1,6 +1,6 @@
 # Directory Server
 
-<hr>
+
 
 * The Directory Server is a trusted server which manages the information required for Lilac to operate as a system. That is, the Directory Server maintains information about the Lilac relays and presence servers. When one of these servers come online, they must first register themselves with the directory server and provide their IP address, public key and function (relay or presence server). The directory server is then able to compile the collection of online relays and presence servers, and update this collection as servers come online and go online. The architecture of Lilac allows for a single presence server, and so the Directory Server operates on a first come-first server basis, with the first presence server to register itself being Presence Server for the system, and any following servers which register become backups in case the primary server goes down. In the case where no presence servers are available in the system, the Directory Server itself can undertake the role.
 
