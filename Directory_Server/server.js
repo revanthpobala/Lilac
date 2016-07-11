@@ -30,17 +30,20 @@ var https = require('https');
 var port = 8080;
 var http = require('http');
 
-// Comment out to get HTTPS.
+// Comment out to get HTTPS. Requires SSL certificate.
 /* Start Web Server */
 /*var options = {
      key: fs.readFileSync('privkey.pem'),
      cert: fs.readFileSync('full-chain.pem'),
      ca: fs.readFileSync('chain.pem')
 }*/
+// If HTTPS is allowed please add options in the handler function.
 var handlerFunction = function (req, res) {
   res.writeHead(200);
 }
 var host;
+// If HTTPS is allowed please add options in the handler function.and use
+// https.createServer instead of http.createServer.
 var server = http.createServer(app,handlerFunction).listen(process.env.PORT);
 var os = require('os');
 var ifaces = os.networkInterfaces();
@@ -50,7 +53,7 @@ for (var dev in ifaces) {
     });
     if(iface.length > 0) host = iface[0].address;
 }
-localAddress = "https://" + host + ":" +server.address().port;
+localAddress =  host + ":" +server.address().port;
 console.log("listening on " + localAddress);
 
 app.use(function(req, res, next)

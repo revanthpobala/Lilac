@@ -1,3 +1,27 @@
+/*
+  Copyright (c) <2016> <Various Authors>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy of
+  this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+
+
 if( typeof XMLHttpRequest == "undefined" ) XMLHttpRequest = function() {
   try { return new ActiveXObject("Msxml2.XMLHTTP.6.0") } catch(e) {}
   try { return new ActiveXObject("Msxml2.XMLHTTP.3.0") } catch(e) {}
@@ -6,7 +30,7 @@ if( typeof XMLHttpRequest == "undefined" ) XMLHttpRequest = function() {
   throw new Error( "This browser does not support XMLHttpRequest." )
 };
 
-function echo_clear(nodename) { 
+function echo_clear(nodename) {
   if (nodename == null)
     nodename = "jsout";
   var jsout = document.getElementById(nodename);
@@ -15,15 +39,15 @@ function echo_clear(nodename) {
   while(jsout.childNodes.length)
     jsout.removeChild(jsout.firstChild)
 };
-function echo_append(msg, nodename) { 
+function echo_append(msg, nodename) {
   if (nodename == null)
     nodename = "jsout";
   var jsout = document.getElementById(nodename);
   jsout.appendChild(document.createTextNode(msg));
   jsout.appendChild(document.createElement("br"));
 };
-function echo_set(msg, nodename) { 
-  echo_clear(nodename); 
+function echo_set(msg, nodename) {
+  echo_clear(nodename);
   echo_append(msg, nodename);
 };
 
@@ -38,7 +62,7 @@ function pretty_hex(input) {
     if (c > 0xFF && !arguments[1].ignore_errors)
       throw "this is not a 8-bit string!";
     else
-    hex += (c < 16 ? "0" : "") 
+    hex += (c < 16 ? "0" : "")
          + c.toString(16)
          + (i == input.length-1 ? "" : ":")
          + (i%16==15 ? " " : "");
@@ -58,8 +82,8 @@ function straight_hex(input) {
   else if (input instanceof Array)
     access = function(s,i) { return s[i]; };
   else throw "straight_hex: input must be String or Array";
-  for(var i = 0; i < input.length; ++i) 
-    hex += (access(input,i) < 16 ? "0" : "") 
+  for(var i = 0; i < input.length; ++i)
+    hex += (access(input,i) < 16 ? "0" : "")
          + access(input,i).toString(16);
   return hex;
 }
@@ -203,7 +227,7 @@ curve25519_clamp_string = function(s) {
 curve25519_getbit = function(curve, c) {
   return Math.floor(curve[Math.floor(c / 16)] / Math.pow(2, c % 16)) % 2;
 }
-  
+
 curve25519_from8bitString = function(/*8bit string */ s) {
   var curve = curve25519_zero();
   if (32 != s.length)
@@ -589,4 +613,3 @@ module.exports.curve25519_to8bitString = curve25519_to8bitString;
 module.exports.curve25519 = curve25519;
 module.exports.curve25519_from8bitString = curve25519_from8bitString;
 module.exports.curve25519_nine = curve25519_nine;
-
