@@ -21,6 +21,8 @@
   OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
   OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+// Port is optional. To avoid conflict this server chooses random port that is
+// available.
 var port =8091;
 //The presence server is where users register their usernames or chat partner.
 //Its address is sent dynamically from the node server
@@ -44,11 +46,12 @@ var fs = require('fs');
 var os = require('os');
 var server = http.createServer(function(req, res)
 {
-    console.log("http://" + host + ":" +server.address().port);
-    console.log(os.hostname());
+    console.log(host + ":" +server.address().port);
+    // Change process.env.PORT to port to run the server on the specified port
 }).listen(process.env.PORT);
 var io = require('socket.io')(server);
 var base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+// DO NOT CHANGE THESE VALUES. CHANGE OF THIS VALUES RESULT IN INCONSISTIENCIES. 
 var fixed_data_size = 365;
 var guard_data_size = 256;
 var middle_data_size = 160;
