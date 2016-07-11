@@ -1,0 +1,6 @@
+{
+  "name": "Lilac",
+  "tagline": "Lilac is an Instant messaging system, that provides greater security and anonymity than existing messaging systems such as TorChat or Whatsapp.",
+  "body": "### Lilac\r\nLilac is a <b>LI</b>ghtweight <b>L</b>owlatency <b>A</b>nonymous <b>C</b>hat. It is more than an instant messaging system. Lilac provides unmatched security and anonymity as compared to other existing messaging systems. In fact, Lilac is way more secure than [TorChat](https://github.com/prof7bit/TorChat) because Lilac protects the users from Traffic analysis. Lilac can defend the users from against powerful governments who suppress freedom of speech or monitor you. If you want to learn more about Lilac please read my thesis report [here](revanthpobala.oom/thesis.pdf).\r\n\r\n\r\n### Installation\r\n\r\n#### Prerequsitie\r\n* [NodeJS](nodejs.org)\r\n\r\n### Folder Structure\r\n\r\n* Directory Server\r\n* Node\r\n* Presence Server\r\n\r\n### Authors and Contributors\r\n@revanthpobala and @mucklai\r\n\r\n### Support or Contact\r\nIf you have trouble installing Lilac or using the system please email us at revanth.pobala@mavs.uta.edu or create a pull request.",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
