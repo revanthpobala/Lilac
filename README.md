@@ -28,7 +28,7 @@ Finally, It's now time to create a relay server network. You can create as many 
 
 If you don't want to use `npm start` command you can start Lilac by issuing following commands.
 
-`node ..\Directory_Server\serrver.js`
+`node ..\Directory_Server\server.js`
 <br>
 `node ..\Presence_Server\lp.js`
 <br>
