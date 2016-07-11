@@ -32,7 +32,7 @@ If you don't want to use `npm start` command you can start Lilac by issuing foll
 <br>
 `node ..\Presence_Server\lp.js`
 <br>
-`node ..]\Node\nc.js`
+`node ..\Node\nc.js`
 
 Explore the source code and implement awesome features.
 
@@ -46,7 +46,7 @@ Explore the source code and implement awesome features.
 
 ## History
 
-This is the Initial version that is released to the public. This is my thesis project. This work is sonsored by [National Science Foundation](https://www/nsf.gov).
+This is the Initial version that is released to the public. This is my thesis project. This work is sponsored by [National Science Foundation](https://www/nsf.gov).
 
 ## Credits
 
