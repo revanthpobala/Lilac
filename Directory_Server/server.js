@@ -1,6 +1,4 @@
 /*
-	Javascript code for the the Directory server in Lilac
-	Runs on NodeJS: use command "node /[directory]/server.js"
   Copyright (c) <2016> <Hussain Mucklai & Revanth Pobala>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -22,6 +20,8 @@
   OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+/* Javascript code for the the Directory server in Lilac
+	Runs on NodeJS: use command "node /[directory]/server.js" */
 
 var express = require('express');
 var app = express();
