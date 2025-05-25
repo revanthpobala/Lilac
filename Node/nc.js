@@ -48,7 +48,7 @@ var server = http.createServer(function(req, res)
 {
     console.log(host + ":" +server.address().port);
     // Change process.env.PORT to port to run the server on the specified port
-}).listen(process.env.PORT);
+}).listen(process.env.PORT || port);
 var io = require('socket.io')(server);
 var base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 // DO NOT CHANGE THESE VALUES. CHANGE OF THIS VALUES RESULT IN INCONSISTIENCIES. 
@@ -477,7 +477,7 @@ function heartbeat()
 		{
 			var msg = (isValidQueue(queue)) ? queue.dequeue() : getSpam();
 
-			var skt = io.sockets.connected[val.id];
+			var skt = io.sockets.sockets.get(val.id);
 			if (skt)
 			{
 				if (msg.event && msg.data)
@@ -488,7 +488,7 @@ function heartbeat()
 			if (isValidQueue(queue))
 			{
 				var msg = queue.dequeue();
-				var skt = io.sockets.connected[val.id];
+				var skt = io.sockets.sockets.get(val.id);
 				if (skt)
 				{
 					if (msg.event && msg.data)
@@ -537,7 +537,7 @@ for (var dev in ifaces) {
 
 localAddress = "https://" + host + ":" + server.address().port;
 console.log("My hostname: " + os.hostname());
-nodeServer = ioClient.connect(nodeServer_address,
+nodeServer = ioClient(nodeServer_address,
 {
   'forceNew': true
 });
@@ -566,7 +566,7 @@ fs.readFile('public-ipv4', 'utf8', function(err, data){
 		host = data.trim();
 		localAddress = "http://" + host + ":" + port;
 		console.log("My address: " + localAddress);
-		nodeServer = ioClient.connect(nodeServer_address,
+		nodeServer = ioClient(nodeServer_address,
 		{
 			'forceNew': true
 		});
@@ -602,7 +602,7 @@ function register_node() {
  */
 function new_forward(address, ID, type)
 {
-	var client = ioClient.connect(address,
+	var client = ioClient(address,
     {
         'forceNew': true
     });
@@ -663,7 +663,7 @@ function new_forward(address, ID, type)
         {
         	if (myClient.bridge || myClient.server)
         	{
-        		var c = io.sockets.connected[this.pid];
+        		var c = io.sockets.sockets.get(this.pid);
         		if (c)
     			{
     				//console.log('disconnecting backward');

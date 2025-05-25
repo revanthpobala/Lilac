@@ -34,7 +34,7 @@ var server = http.createServer(function (req,res) {
 	console.log(os.hostname());
 	res.writeHead(200);
 	res.end("Hi. You may be looking for thelilacproject.org.\n");
-}).listen(process.env.PORT);
+}).listen(process.env.PORT || 8092); // Added fallback port 8092 as an example
 var port = server.address().port;
 var io = require('socket.io')(server);
 var bigInt = require('./BigInt');
@@ -246,7 +246,7 @@ function heartbeat()
 	{
 		var queue = val.queue;
 		var msg = (typeof queue != "undefined" && queue != null && queue.length > 0) ? queue.shift() : getSpam();
-		var skt = io.sockets.connected[val.id];
+	var skt = io.sockets.sockets.get(val.id);
 		if (skt)
 		{
 			if (msg.event && msg.data)
@@ -424,7 +424,7 @@ for (var dev in ifaces) {
 }
 localAddress = "http://" + host + ":" + port;
 
-var nodeServer = ioClient.connect(nodeServer_address,
+var nodeServer = ioClient(nodeServer_address,
 {
 	'forceNew': true
 });
@@ -440,7 +440,7 @@ fs.readFile('public-ipv4', 'utf8', function(err, data) {
 		host = data.trim();
 		//connect to node server
 		localAddress = "http://" + host + ":" + port;
-		var nodeServer = ioClient.connect(nodeServer_address,
+		var nodeServer = ioClient(nodeServer_address,
 		{
 			'forceNew': true
 		});
@@ -582,7 +582,7 @@ io.sockets.on('connection', function(socket)
 						if (myClient)
 						{
 							console.log(myClient.username + " found.");
-							var tempClient = io.sockets.connected[myClient.id];
+							var tempClient = io.sockets.sockets.get(myClient.id);
 							var currentIdentifier = find_identifier(myClient.id);
 							var sendData =
 							{
@@ -619,7 +619,7 @@ io.sockets.on('connection', function(socket)
 							if (socket.id != myClient.id)
 							{
 								console.log(myClient.connection_id + " found.");
-								var tempClient = io.sockets.connected[myClient.id];
+								var tempClient = io.sockets.sockets.get(myClient.id);
 								var currentIdentifier = find_identifier(myClient.id);
 								var sendData =
 								{

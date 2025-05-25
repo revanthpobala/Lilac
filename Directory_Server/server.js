@@ -38,13 +38,13 @@ var http = require('http');
      ca: fs.readFileSync('chain.pem')
 }*/
 // If HTTPS is allowed please add options in the handler function.
-var handlerFunction = function (req, res) {
-  res.writeHead(200);
-}
+// var handlerFunction = function (req, res) {
+//   res.writeHead(200);
+// }
 var host;
 // If HTTPS is allowed please add options in the handler function.and use
 // https.createServer instead of http.createServer.
-var server = http.createServer(app,handlerFunction).listen(process.env.PORT);
+var server = http.createServer(app).listen(process.env.PORT || port);
 var os = require('os');
 var ifaces = os.networkInterfaces();
 for (var dev in ifaces) {
@@ -145,8 +145,10 @@ io.sockets.on('connection', function(socket)
 				var presence_server_data = {presence_server_address: data.address};
 				for (i=0; i<nodes.length; i++)
 				{
-					tempClient = io.sockets.connected[nodes[i].id];
-					tempClient.emit('presence server', presence_server_data);
+					tempClient = io.sockets.sockets.get(nodes[i].id);
+					if (tempClient) {
+						tempClient.emit('presence server', presence_server_data);
+					}
 				}
 			}
 		}
