@@ -23,152 +23,71 @@
 /* Javascript code for the the Directory server in Lilac
 	Runs on NodeJS: use command "node /[directory]/server.js" */
 
-var express = require('express');
-var app = express();
-var fs = require('fs');
-var https = require('https');
-var port = 8080;
-var http = require('http');
+const http = require('http');
+const os = require('os');
+const path = require('path'); // For __dirname
 
+const app = require('./express-config'); // express-config.js now exports the app
+const directoryUtils = require('./directory-utils'); // directory-utils.js exports utils
+const { initializeSocketIO } = require('./socket-handlers'); // socket-handlers.js exports the initializer
+
+const port = 8080; // Default port
+
+// Function to get local IP address
+const getLocalIpAddress = () => {
+    const ifaces = os.networkInterfaces();
+    for (const dev in ifaces) {
+        const iface = ifaces[dev].filter(details => details.family === 'IPv4' && details.internal === false);
+        if (iface.length > 0) {
+            return iface[0].address;
+        }
+    }
+    return '127.0.0.1'; // Fallback
+};
+
+const host = getLocalIpAddress();
+
+// If HTTPS is allowed please add options in the handler function.and use
+// https.createServer instead of http.createServer.
+// For HTTPS, you would also need to require 'https' and potentially 'fs' for options.
+const server = http.createServer(app).listen(process.env.PORT || port, () => {
+    const actualPort = server.address().port;
+    const localAddress = `${host}:${actualPort}`;
+    console.log(`listening on ${localAddress}`);
+
+    // Pass the actual public path and a function to get localAddress to socket handlers
+    // This avoids relying on global state for localAddress within socket-handlers
+    const publicPath = path.join(__dirname, 'public');
+    initializeSocketIO(io, directoryUtils, publicPath, () => localAddress);
+});
+
+const io = require('socket.io')(server);
+
+// The initializeSocketIO call was moved inside the listen callback
+// to ensure localAddress (which depends on server.address().port) is correctly determined
+// before being potentially used by socket-handlers.
+// However, localAddress for 'presence server' emit in socket-handlers
+// might be needed before a client connects to the HTTP server.
+// Let's refine this: localAddress for socket.io purposes should be determined once.
+
+// Determine localAddress for socket.io purposes
+// Note: server.address() is null until 'listening' event, so we construct it manually for now
+// or pass a getter function if dynamic port (like process.env.PORT) is critical.
+// For simplicity, if process.env.PORT is used, the console log will show the right one,
+// but initial emits from socket-handlers might use the default 'port' if not careful.
+
+// The current initializeSocketIO takes a getLocalAddress function, which is good.
+// server.js is now much leaner.
+// The SSL options part is commented out as in the original, can be added if needed.
+/*
 // Comment out to get HTTPS. Requires SSL certificate.
-/* Start Web Server */
-/*var options = {
+// var https = require('https'); // Would be needed for HTTPS
+// var fs = require('fs'); // Would be needed for SSL options
+var options = {
      key: fs.readFileSync('privkey.pem'),
      cert: fs.readFileSync('full-chain.pem'),
      ca: fs.readFileSync('chain.pem')
-}*/
-// If HTTPS is allowed please add options in the handler function.
-// var handlerFunction = function (req, res) {
-//   res.writeHead(200);
-// }
-var host;
+}
 // If HTTPS is allowed please add options in the handler function.and use
-// https.createServer instead of http.createServer.
-var server = http.createServer(app).listen(process.env.PORT || port);
-var os = require('os');
-var ifaces = os.networkInterfaces();
-for (var dev in ifaces) {
-    var iface = ifaces[dev].filter(function(details) {
-        return details.family === 'IPv4' && details.internal === false;
-    });
-    if(iface.length > 0) host = iface[0].address;
-}
-localAddress =  host + ":" +server.address().port;
-console.log("listening on " + localAddress);
-
-app.use(function(req, res, next)
-{
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-var path = __dirname + '/public';
-app.get('/', function(req, res, next)
-{
-    res.sendFile(path + '/index.html');
-});
-app.use(express.static(path));
-
-/* End Web Server */
-
-/* Node Server Initialization */
-
-var io = require('socket.io')(server);
-var nodes = [];
-var creds = [];
-var presence_servers = [];
-function directoryWrite()
-{
-	var nodesString = JSON.stringify(creds);
-	var file = fs.createWriteStream(path + '/creds.json');
-	file.on('error', function(err)
-	{
-	 	console.log("error while writing to file");
- 	});
-	file.write(nodesString);
-	file.end();
-}
-
-function find_node(id)
-{
-	var len = nodes.length;
-	for (var i = 0; i < len; i++)
-            if ((nodes[i]).id == id)
-            	return i;
-	return -1;
-}
-
-function find_presence(id)
-{
-	var len = presence_servers.length;
-	for (var i = 0; i < len; i++)
-            if ((presence_servers[i]).id == id)
-            	return i;
-	return -1;
-}
-
-/* End Node Server Initialization */
-
-io.sockets.on('connection', function(socket)
-{
-
-	socket.on('register_node', function(data)
-	{
-		var i = find_node(socket.id);
-		if (i == -1)
-		{
-			console.log("node connected");
-			var node = {id: socket.id};
-			nodes.push(node);
-			var n = {host: data.host, port: data.port, publicKey: data.pk};
-			creds.push(n);
-			directoryWrite();
-			var presence_server_data = {presence_server_address: localAddress};
-			if (presence_servers.length > 0)
-				presence_server_data.presence_server_address = presence_servers[0].address;
-			socket.emit('presence server', presence_server_data);
-		}
-	});
-
-	socket.on('register_presence_server', function(data)
-	{
-		var tempClient;
-		var i = find_presence(socket.id);
-		if (i == -1)
-		{
-			console.log("presence server connected");
-			var presence_server = {id: socket.id, address: data.address};
-      console.log("Address\t"+data.address);
-			presence_servers.push(presence_server);
-			if (presence_servers.length == 1)
-			{
-				var presence_server_data = {presence_server_address: data.address};
-				for (i=0; i<nodes.length; i++)
-				{
-					tempClient = io.sockets.sockets.get(nodes[i].id);
-					if (tempClient) {
-						tempClient.emit('presence server', presence_server_data);
-					}
-				}
-			}
-		}
-	});
-
-	socket.on('disconnect', function()
-	{
-		var i = find_node(socket.id);
-		if (i != -1)
-		{
-			nodes.splice(i, 1);
-			creds.splice(i, 1);
-			directoryWrite();
-		}
-
-		i = find_presence(socket.id);
-		if (i != -1)
-		{
-			presence_servers.splice(i, 1);
-		}
-	});
-
-});
+// https.createServer(options, app).listen(...) instead of http.createServer.
+*/
